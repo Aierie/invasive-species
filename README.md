@@ -1,20 +1,8 @@
 # invasive-species
+To set up dependencies, run `npm i`.
 
-## Build Setup
-
-```bash
-# install dependencies
-$ npm install
-
-# serve with hot reload at localhost:3000
-$ npm run dev
-
-# build for production and launch server
-$ npm run build
-$ npm run start
-
-# generate static project
-$ npm run generate
-```
+To run, do `npm run build && npm run dev`.
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
+
+Modifying content can be done by changing `content/years.csv` and `content/animals.csv`.
