@@ -1,31 +1,29 @@
 <template>
-  <div class="timeline">
-    <div
-      v-for="(timelineItem, index) in timelineItems"
-      :key="index"
-      class="overview"
-    >
-      <div class="header">
-        <div class="summary-images">
-          <div class="year">
-            {{ timelineItem.year }}
-          </div>
-          <div class="animals">
-            <div
-              v-for="animal in timelineItem.animals"
-              :key="animal"
-              @click="$emit('select:animal', animal)"
-            >
-              {{ animal }}
+  <div class="[ timeline ] [ padded ]">
+      <div
+        v-for="(timelineItem, index) in timelineItems"
+        :key="index"
+        class="overview"
+      >
+        <div class="header">
+          <div class="summary-images">
+            <div class="year">
+              {{ timelineItem.year }}
+            </div>
+            <div class="animals">
+              <div
+                v-for="animal in timelineItem.animals"
+                :key="animal.id"
+                @click="$emit('select:animal', animal.id)"
+              >
+                {{ animal.name }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="content">
-        <div class="description">
+        <div class="content">
           {{ timelineItem.description }}
         </div>
-      </div>
     </div>
   </div>
 </template>
@@ -52,28 +50,40 @@ export default {
 
 <style scoped lang="scss">
 .timeline {
-  max-width: 260px;
-  margin: 20px;
+  overflow-y: auto;
+  overflow-x: visible;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
 
+.padded {
+  padding: 16px;
+  padding-top: calc(16px + 0.75rem);
+}
+
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* make scrollbar transparent */
+}
+
 .overview {
-  display: flex;
   position: relative;
-  flex-direction: column;
-  padding-bottom: 16px;
   /* the line of the timeline */
   border-left: 1px dashed black;
+  padding-bottom: 12px;
+
+  > * {
+    transform: translateY(-1.5rem);
+  }
 
   /* the marker on the timeline */
   .header {
     width: 100%;
+    height: 3rem;
     position: relative;
     display: flex;
     align-items: baseline;
-    transform: translateY(-0.5rem);
 
     &:before {
       content: '';
@@ -89,8 +99,9 @@ export default {
     }
 
     .summary-images {
+      height: 100%;
       display: flex;
-      align-items: baseline;
+      align-items: center;
       margin-left: 2rem;
     }
 
@@ -101,6 +112,14 @@ export default {
     .animals {
       display: flex;
       margin-left: 12px;
+    }
+
+    .animal {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 50%;
+      background-color: black;
+      color: transparent;
     }
 
     .animals > * + * {
@@ -117,21 +136,8 @@ export default {
   }
 
   .content {
-    display: flex;
-    flex-direction: column;
     margin-left: 2rem;
-    transform: translateY(-0.5rem);
-  }
-
-  .description {
-    margin-top: 0.5rem;
     font-size: 0.75rem;
   }
-
-  // &:not(.active) .description {
-  //   max-height: 0px;
-  //   overflow: hidden;
-  //   transition: 1s;
-  // }
 }
 </style>
