@@ -18,7 +18,7 @@
 <script>
 import Timeline from './Timeline'
 import Description from './Description'
-import Map from './Map'
+import Map from '../Map'
 
 export default {
   components: {
